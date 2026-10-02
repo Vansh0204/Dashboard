@@ -190,10 +190,11 @@
       </div>
     </section>
 
-    <!-- Row 3: Split Section (Telemetry Graph + Gauge + Diagnostic Alarm Matrix) -->
-    <section class="split-row">
-      
-      <!-- Left Column: Pressure Waveform & Analog Gauge -->
+    <!-- Main Dashboard Columns: Left (Telemetry + PLC Registers) & Right (FDD + Simulator Bench) -->
+    <div class="split-columns">
+      <!-- Left Column -->
+      <div class="split-col">
+        <!-- Left Column: Pressure Waveform & Analog Gauge -->
       <div class="panel telemetry-panel">
         <div class="panel-header">
           <div class="panel-title-group">
@@ -253,94 +254,7 @@
         </div>
       </div>
 
-      <!-- Right Column: Fault Detection & Diagnostic Matrix (FDD) -->
-      <div class="panel fdd-panel">
-        <div class="panel-header">
-          <div class="panel-title-group">
-            <h2 class="panel-title">
-              <span class="icon">🛡️</span>
-              FAULT DIAGNOSIS & ALARM MATRIX
-            </h2>
-            <span class="panel-sub">Real-Time Pneumatic Fault Detection (PDF Specifications)</span>
-            <div class="plain-hint">Five things that can go wrong. Green means fine, red means attention needed.</div>
-          </div>
-          <button class="clear-alarms-btn" id="ack-alarms-btn">Acknowledge All</button>
-        </div>
-
-        <!-- 5 Fault Indicators Grid from PDF -->
-        <div class="fault-matrix-grid">
-          <div class="fault-badge-item" id="fdd-airleak">
-            <div class="fault-icon">💨</div>
-            <div class="fault-meta">
-              <div class="fault-name">Air Line Leakage</div>
-              <div class="fault-desc">Decay &Delta;P/&Delta;t &gt; 0.05 bar/s</div>
-              <div class="plain-hint">Air is escaping from a pipe or a fitting.</div>
-            </div>
-            <span class="fault-state-pill pill-ok" id="pill-airleak">OK</span>
-          </div>
-
-          <div class="fault-badge-item" id="fdd-lowpressure">
-            <div class="fault-icon">⚠️</div>
-            <div class="fault-meta">
-              <div class="fault-name">Low Supply Pressure</div>
-              <div class="fault-desc">Line Pressure &lt; 4.5 bar</div>
-              <div class="plain-hint">Not enough air pressure to push reliably.</div>
-            </div>
-            <span class="fault-state-pill pill-ok" id="pill-lowpressure">OK</span>
-          </div>
-
-          <div class="fault-badge-item" id="fdd-cylinderext">
-            <div class="fault-icon">⚙️</div>
-            <div class="fault-meta">
-              <div class="fault-name">Cylinder Non-Extension</div>
-              <div class="fault-desc">Stroke Timeout / Valve Sticking</div>
-              <div class="plain-hint">The pusher is stuck, or far too slow.</div>
-            </div>
-            <span class="fault-state-pill pill-ok" id="pill-cylinderext">OK</span>
-          </div>
-
-          <div class="fault-badge-item" id="fdd-sortingmismatch">
-            <div class="fault-icon">📦</div>
-            <div class="fault-meta">
-              <div class="fault-name">Sorting Failure / Miss</div>
-              <div class="fault-desc">Bin IR verification mismatch</div>
-              <div class="plain-hint">A piece ended up in the wrong bin.</div>
-            </div>
-            <span class="fault-state-pill pill-ok" id="pill-sortingmismatch">OK</span>
-          </div>
-
-          <div class="fault-badge-item" id="fdd-sensorfault">
-            <div class="fault-icon">🔌</div>
-            <div class="fault-meta">
-              <div class="fault-name">Sensor Abnormality</div>
-              <div class="fault-desc">Inductive/IR Sensor Stuck/Disconn</div>
-              <div class="plain-hint">The metal detector is stuck on or off.</div>
-            </div>
-            <span class="fault-state-pill pill-ok" id="pill-sensorfault">OK</span>
-          </div>
-        </div>
-
-        <!-- Active Diagnostics Log Feed -->
-        <div class="fault-log-container">
-          <div class="fault-log-header">
-            <span>LIVE EVENT & ALARM LOG</span>
-            <span class="log-count" id="log-count-badge">0 Active</span>
-          </div>
-          <div class="fault-log-list" id="fault-log-list">
-            <!-- Event entries dynamically added here -->
-            <div class="log-entry log-info">
-              <span class="log-time">[INIT]</span>
-              <span class="log-code">SYS-001</span>
-              <span class="log-msg">PLC Controller online. Pneumatic line initialized at 6.2 bar.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Row 4: PLC Register Mapping & Interactive Test Bench / Simulator Controls -->
-    <section class="split-row">
-      <!-- Left: PLC Hardware Interface & Modbus Registers -->
+        <!-- Left: PLC Hardware Interface & Modbus Registers -->
       <div class="panel plc-panel">
         <div class="panel-header">
           <div class="panel-title-group">
@@ -462,8 +376,95 @@
           </table>
         </div>
       </div>
+      </div>
 
-      <!-- Right: Interactive Fault Injection Test-Bench (For Demonstrations & Viva) -->
+      <!-- Right Column -->
+      <div class="split-col">
+        <!-- Right Column: Fault Detection & Diagnostic Matrix (FDD) -->
+      <div class="panel fdd-panel">
+        <div class="panel-header">
+          <div class="panel-title-group">
+            <h2 class="panel-title">
+              <span class="icon">🛡️</span>
+              FAULT DIAGNOSIS & ALARM MATRIX
+            </h2>
+            <span class="panel-sub">Real-Time Pneumatic Fault Detection (PDF Specifications)</span>
+            <div class="plain-hint">Five things that can go wrong. Green means fine, red means attention needed.</div>
+          </div>
+          <button class="clear-alarms-btn" id="ack-alarms-btn">Acknowledge All</button>
+        </div>
+
+        <!-- 5 Fault Indicators Grid from PDF -->
+        <div class="fault-matrix-grid">
+          <div class="fault-badge-item" id="fdd-airleak">
+            <div class="fault-icon">💨</div>
+            <div class="fault-meta">
+              <div class="fault-name">Air Line Leakage</div>
+              <div class="fault-desc">Decay &Delta;P/&Delta;t &gt; 0.05 bar/s</div>
+              <div class="plain-hint">Air is escaping from a pipe or a fitting.</div>
+            </div>
+            <span class="fault-state-pill pill-ok" id="pill-airleak">OK</span>
+          </div>
+
+          <div class="fault-badge-item" id="fdd-lowpressure">
+            <div class="fault-icon">⚠️</div>
+            <div class="fault-meta">
+              <div class="fault-name">Low Supply Pressure</div>
+              <div class="fault-desc">Line Pressure &lt; 4.5 bar</div>
+              <div class="plain-hint">Not enough air pressure to push reliably.</div>
+            </div>
+            <span class="fault-state-pill pill-ok" id="pill-lowpressure">OK</span>
+          </div>
+
+          <div class="fault-badge-item" id="fdd-cylinderext">
+            <div class="fault-icon">⚙️</div>
+            <div class="fault-meta">
+              <div class="fault-name">Cylinder Non-Extension</div>
+              <div class="fault-desc">Stroke Timeout / Valve Sticking</div>
+              <div class="plain-hint">The pusher is stuck, or far too slow.</div>
+            </div>
+            <span class="fault-state-pill pill-ok" id="pill-cylinderext">OK</span>
+          </div>
+
+          <div class="fault-badge-item" id="fdd-sortingmismatch">
+            <div class="fault-icon">📦</div>
+            <div class="fault-meta">
+              <div class="fault-name">Sorting Failure / Miss</div>
+              <div class="fault-desc">Bin IR verification mismatch</div>
+              <div class="plain-hint">A piece ended up in the wrong bin.</div>
+            </div>
+            <span class="fault-state-pill pill-ok" id="pill-sortingmismatch">OK</span>
+          </div>
+
+          <div class="fault-badge-item" id="fdd-sensorfault">
+            <div class="fault-icon">🔌</div>
+            <div class="fault-meta">
+              <div class="fault-name">Sensor Abnormality</div>
+              <div class="fault-desc">Inductive/IR Sensor Stuck/Disconn</div>
+              <div class="plain-hint">The metal detector is stuck on or off.</div>
+            </div>
+            <span class="fault-state-pill pill-ok" id="pill-sensorfault">OK</span>
+          </div>
+        </div>
+
+        <!-- Active Diagnostics Log Feed -->
+        <div class="fault-log-container">
+          <div class="fault-log-header">
+            <span>LIVE EVENT & ALARM LOG</span>
+            <span class="log-count" id="log-count-badge">0 Active</span>
+          </div>
+          <div class="fault-log-list" id="fault-log-list">
+            <!-- Event entries dynamically added here -->
+            <div class="log-entry log-info">
+              <span class="log-time">[INIT]</span>
+              <span class="log-code">SYS-001</span>
+              <span class="log-msg">PLC Controller online. Pneumatic line initialized at 6.2 bar.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- Right: Interactive Fault Injection Test-Bench (For Demonstrations & Viva) -->
       <div class="panel control-panel">
         <div class="panel-header">
           <div class="panel-title-group">
@@ -541,7 +542,8 @@
           </div>
         </div>
       </div>
-    </section>
+      </div>
+    </div>
 
     <!-- Footer Information -->
     <footer class="scada-footer">

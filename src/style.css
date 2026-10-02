@@ -546,9 +546,17 @@ body.industrial-theme {
 /* ==========================================================================
    ROW 3: SPLIT TELEMETRY & FAULT DIAGNOSIS
    ========================================================================== */
+.split-columns,
 .split-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.split-col {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -1106,6 +1114,7 @@ body.industrial-theme {
   .kpi-bar {
     grid-template-columns: repeat(3, 1fr);
   }
+  .split-columns,
   .split-row {
     grid-template-columns: 1fr;
   }
@@ -1417,6 +1426,7 @@ body.industrial-theme {
    card (telemetry beside the taller fault matrix, fault bench beside the taller
    register map). Let each panel size to its own content instead.
    ========================================================================== */
+.split-columns,
 .split-row {
   align-items: start;
 }
